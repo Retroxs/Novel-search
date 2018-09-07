@@ -13,11 +13,20 @@ mongoose.connect(
   }
 );
 
-const novelSchema = new mongoose.Schema({
-  name: String,
-  resourceLink: String,
-  counter: Number
-});
+const novelSchema = new mongoose.Schema(
+  {
+    name: String,
+    resourceLink: String,
+    counter: Number
+  },
+  {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at"
+    },
+    versionKey:false
+  }
+);
 
 const Novel = mongoose.model("Novel", novelSchema);
 
@@ -25,7 +34,7 @@ function insertNovel(novelRes) {
   let novel = new Novel({
     name: novelRes.name,
     resourceLink: novelRes.resourceLink,
-    counter: 0
+    counter: 1
   });
   novel.save();
 }
@@ -42,7 +51,7 @@ function updateCounter(novel) {
     if (error) {
       console.log(error);
     } else {
-      console.log("Update success!");
+      // console.log("Update success!");
     }
   });
 }
