@@ -39,7 +39,7 @@ async function parseOriginUrl(page, url) {
 
 const searchBySpy = async keyword => {
   let resourceLink;
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
   const page = await browser.newPage();
   await page.goto(generateUrl(keyword));
   console.log(chalk.green(`正在尝试网盘搜索 ${keyword}...`));
